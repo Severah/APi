@@ -5,7 +5,7 @@ const Product = require('../models/product');
 
 
 //get all products
-router.get('/products', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const products = await Product.getAllProducts();
         res.json(products);
@@ -13,3 +13,5 @@ router.get('/products', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 })
+
+module.exports = router;

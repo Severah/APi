@@ -9,18 +9,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-// users route
-app.get('/users', async (req, res) => {
-    connection.query('SELECT * FROM users', (err, results) => {
-        if (err) {
-            console.error(err);
-            res.status(500).json({ error: 'Internal server error' });
-            return;
-        }
-        res.json(results);
-    })
-})
-    
+const userRoutes = require('./routes/users');
+const productRoutes = require('./routes/products');
+
+//Register routes
+app.use('/users', userRoutes);
+app.use('/products', productRoutes);
+
+// Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
